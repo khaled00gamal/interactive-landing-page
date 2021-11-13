@@ -7,7 +7,7 @@ const navBar = document.getElementById("navbar__list");
 
 //dynamically create li item and append to nav
 //works
-let addItemToNav = function () {
+let buildNavBar = function () {
   for (section of sectionsArr) {
      let sectionId = section.getAttribute("id");
      let sectionName = section.getAttribute("data-nav");
@@ -17,6 +17,8 @@ let addItemToNav = function () {
     navBar.appendChild(item);
   }
 };
+//buil;d the nav bar
+buildNavBar();
 
 //check if user is in section
 let isInViewPort = function (section) {
@@ -48,10 +50,29 @@ let inViewPortEvent = function () {
   }
 };
 
-//buil;d the nav bar
-addItemToNav();
-//listen to scroll
+//listen to scroll on dom
 document.addEventListener("scroll",inViewPortEvent());
+
+//scroll to top
+const topButton = document.getElementById("scroll-to-top");
+
+window.onscroll = function(){scrollToTop()};
+
+let scrollToTop = function(){
+    if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+        topButton.style.display="block";
+    }else{
+        topButton.style.display="none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0; 
+  }
+
+
+
 
 
 

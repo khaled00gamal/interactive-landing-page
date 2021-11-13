@@ -181,6 +181,31 @@ section:nth-of-type(3n + 1) .landing__container::after {
     transition: ease 0.5s all;
 }
 
+/* scroll to top button */
+#scroll-to-top{
+   display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background: linear-gradient(
+    0deg,
+    rgba(125, 99, 245, 0.301) 0%,
+    rgb(255, 255, 255) 100%
+  );
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 60px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#scroll-to-top:hover {
+    background-color: rgb(50, 199, 186); /* Add a dark-grey background on hover */
+  }
+
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
