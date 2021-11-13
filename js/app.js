@@ -71,6 +71,21 @@ function topFunction() {
     document.documentElement.scrollTop = 0; 
   }
 
+  //hide navbar on scroll
+
+  let lastScrollTop;
+   const navbar = document.getElementsByClassName('navbar__menu')[0];
+  window.addEventListener('scroll',function(){
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if(scrollTop > lastScrollTop){
+  navbar.style.display='none';
+  }
+  else{
+  navbar.style.display='initial';
+  }
+  lastScrollTop = scrollTop;
+  });
+  
 
 
 
