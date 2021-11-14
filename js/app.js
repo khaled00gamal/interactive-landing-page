@@ -1,7 +1,8 @@
 const sectionsArr = Array.from(document.querySelectorAll("section"));
-const sections = document.querySelectorAll("section");
 const sectionCount = sectionsArr.length;
 const navBar = document.getElementById("navbar__list");
+const sections = document.querySelectorAll("section[id]");
+
 
 
 
@@ -34,8 +35,9 @@ let isInViewPort = function (section) {
 };
 
 let inViewPortEvent = function () {
-  for (let i = 1; i < sectionCount; i++) {
-    let currentSection = document.getElementById("section" + i);
+  for (let section of sectionsArr) {
+    let sectionId=section.getAttribute("id");
+    let currentSection = document.getElementById(`${sectionId}`);
     //listen to scrolls
     window.addEventListener(
       "scroll",
@@ -47,22 +49,46 @@ let inViewPortEvent = function () {
         }
       }, false
     );
+    }
+  };
 
-   
+
+  window.addEventListener("scroll", navHighlighter);
+
+  //highlight active link when scrolling
+  //works
+  function navHighlighter() {
+  
+    let scrollY = window.pageYOffset;
+    
+    
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 50;
+      sectionId = current.getAttribute("id");
+      
+    
+      if (
+        scrollY > sectionTop &&
+        scrollY <= sectionTop + sectionHeight
+      ){
+        document.querySelector(".navbar__menu a[href*=" + sectionId + "]").classList.add("active-link");
+      } else {
+        document.querySelector(".navbar__menu a[href*=" + sectionId + "]").classList.remove("active-link");
+      }
+    });
   }
-};
+
+  
+
 
 //listen to scroll on dom
 document.addEventListener("scroll",inViewPortEvent());
 
 
-let activateNav = function (){
-  const links = document.querySelectorAll('.menu__link');
-
-}
-
+//works 
 let clickToScroll = function (){
-  for ( let section of sections ){
+  for ( let section of sectionsArr ){
 
     const listId = section.id;
  
@@ -100,20 +126,6 @@ function topFunction() {
     document.documentElement.scrollTop = 0; 
   }
 
-  //hide navbar on scroll
-
-  // let lastScrollTop;
-  //  const navbar = document.getElementsByClassName('navbar__menu')[0];
-  // window.addEventListener('scroll',function(){
-  // let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  // if(scrollTop > lastScrollTop){
-  // navbar.style.display='none';
-  // }
-  // else{
-  // navbar.style.display='initial';
-  // }
-  // lastScrollTop = scrollTop;
-  // });
 
   //buil;d the nav bar
 buildNavBar();
